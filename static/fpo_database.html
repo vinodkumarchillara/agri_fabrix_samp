@@ -87,7 +87,7 @@
 
 // Show full record in the modal
 function showFullRecord(data_id) {
-    fetch(`/records/${data_id}`)
+    fetch(`/fpo_database/records/${data_id}`)
         .then(response => response.json())
         .then(record => {
             const modal = document.getElementById('modal');
