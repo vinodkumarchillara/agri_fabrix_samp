@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FPO</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="/static/fpo_style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>FPO Database</h1>
+
+        <!-- Card Container -->
+        <div id="card-container" class="card-container"></div>
+
+        <!-- Pagination Controls -->
+        <div class="pagination">
+            <button id="first-page-btn">First</button>
+            <button id="prev-page-btn">Previous</button>
+            <span id="page-info"></span>
+            <button id="next-page-btn">Next</button>
+            <button id="last-page-btn">Last</button>
+        </div>
+    </div>
+
+    <!-- Modal for displaying full record data -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span id="close-modal" class="close-btn">&times;</span>
+            <h2>Company Details</h2>
+            <div id="modal-details"></div>
+            <!-- Button to show directors -->
+            <button id="directors-btn" onclick="showDirectors()">Show Directors</button>
+            <!-- Section to display directors -->
+            <div id="directors-container" style="display:none;">
+                <h3>Directors</h3>
+                <ul id="directors-list"></ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let page = 1;
+        let total_pages = 1;
+        let currentRecordId = null; // To store the current record's data_id
+
+        // Fetch and display records for the current page
+        function fetchRecords(page) {
+            fetch(`/fpo_database/records?page=${page}`)
+                .then(response => response.json())
+                .then(data => {
+                    total_pages = data.total_pages;
+                    displayRecords(data.records);
+                    updatePaginationInfo();
+                })
+                .catch(error => {
+                    console.error('Error fetching records:', error);
+                    alert("There was an error loading the records.");
+                });
+        }
+
+        // Display records as cards
+        function displayRecords(records) {
+            const cardContainer = document.getElementById('card-container');
+            cardContainer.innerHTML = ''; // Clear existing cards
+
+            records.forEach(record => {
+                const card = document.createElement('div');
+                card.classList.add('card');
+                card.innerHTML = `
+                    <h3>Company ID: ${record.data_id}</h3>
+                    <div class="card_num">
+                        <h4>${record.data_number_of_members} individual farmers</h4>
+                    </div>
+                    <p><strong>Company Name:</strong> ${record.data_company_name}</p>
+                    <p><strong>Registered Address:</strong> ${record.data_registered_address}</p>
+                    <div class="button">
+                        <button class="more-info-btn" onclick="showFullRecord(${record.data_id})">
+                            <i class="fas fa-info-circle"></i> More Information
+                        </button>
+                    </div>
+                `;
+                cardContainer.appendChild(card);
+            });
+        }
+
+        // Show full record in the modal
+        function showFullRecord(data_id) {
+            fetch(`/fpo_database/records/${data_id}`)
+                .then(response => response.json())
+                .then(record => {
+                    const modal = document.getElementById('modal');
+                    const modalDetails = document.getElementById('modal-details');
+                    currentRecordId = record.data_id; // Store the current record's ID
+                    modalDetails.innerHTML = `
+                        <h3>${record.data_company_name}</h3>
+                        <p><strong>Company ID:</strong> ${record.data_id}</p>
+                        <p><strong>Cin No:</strong> ${record.data_cin}</p>
+                        <p><strong>Active:</strong> ${record.data_active_compliance}</p>
+                        <p><strong>ROC Code:</strong> ${record.data_roc_code}</p>
+                        <p><strong>Registration No:</strong> ${record.data_registration_number}</p>
+                    `;
+                    modal.style.display = "block"; // Show the modal
+                })
+                .catch(error => {
+                    console.error('Error fetching record:', error);
+                    alert("There was an error loading the record.");
+                });
+        }
+
+        // Show directors when the button is clicked
+        function showDirectors() {
+            fetch(`/fpo_database/directors/${currentRecordId}`)
+                .then(response => response.json())
+                .then(directors => {
+                    const directorsContainer = document.getElementById('directors-container');
+                    const directorsList = document.getElementById('directors-list');
+                    directorsList.innerHTML = ''; // Clear existing list
+
+                    directors.forEach(director => {
+                        const listItem = document.createElement('li');
+                        listItem.textContent = `${director.director_name} (${director.designation})`;
+                        directorsList.appendChild(listItem);
+                    });
+
+                    directorsContainer.style.display = "block"; // Show the directors section
+                })
+                .catch(error => {
+                    console.error('Error fetching directors:', error);
+                    alert("There was an error loading the directors.");
+                });
+        }
+
+        // Close the modal when the user clicks the close button
+        document.getElementById('close-modal').addEventListener('click', () => {
+            document.getElementById('modal').style.display = "none";
+        });
+
+        // Close the modal if the user clicks outside of it
+        window.addEventListener('click', (event) => {
+            if (event.target === document.getElementById('modal')) {
+                document.getElementById('modal').style.display = "none";
+            }
+        });
+
+        // Update the pagination info
+        function updatePaginationInfo() {
+            document.getElementById('page-info').textContent = `Page ${page} of ${total_pages}`;
+        }
+
+        // Event listeners for pagination buttons
+        document.getElementById('first-page-btn').addEventListener('click', () => {
+            page = 1;
+            fetchRecords(page);
+        });
+
+        document.getElementById('prev-page-btn').addEventListener('click', () => {
+            if (page > 1) {
+                page--;
+                fetchRecords(page);
+            }
+        });
+
+        document.getElementById('next-page-btn').addEventListener('click', () => {
+            if (page < total_pages) {
+                page++;
+                fetchRecords(page);
+            }
+        });
+
+        document.getElementById('last-page-btn').addEventListener('click', () => {
+            page = total_pages;
+            fetchRecords(page);
+        });
+
+        // Fetch records on initial load
+        fetchRecords(page);
+    </script>
+</body>
+</html>

@@ -1,0 +1,157 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f9f0; /* Light green background */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100vh;
+}
+
+/* Container for the content */
+.container {
+    width: 80%;
+    max-width: 1200px;
+    padding: 20px;
+    background-color: #ffffff; /* White background for container */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+/* Heading */
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #27ae60; /* #27ae60 Green for heading */
+    font-size: 2.5em;
+    font-weight: bold;
+}
+
+/* Card Container */
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    background-color: #f4f8f4; /* Very light green */
+    padding-top: 20px;
+}
+
+/* Individual Card */
+.card {
+    background-color: #a8d5ba; /* Light green card background */
+    border: 1px solid #8fbdbe; /* Slightly darker green border */
+    border-radius: 8px;
+    padding: 16px;
+    width: 220px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
+    background-color: #80bfa3; /* Slightly darker green on hover */
+}
+
+/* Card Titles */
+.card h3 {
+    font-size: 16px;
+    margin-bottom: 8px;
+    color: #ffffff;
+}
+
+.card_num {
+    font-size: 12px;
+    color: #9c1212;
+    background-color: #ecf457; /* Yellow for emphasis */
+    border: 1px solid #8fbdbe;
+}
+
+.button {
+    margin-top: 15px;
+}
+
+/* Button styling */
+.more-info-btn {
+    padding: 8px 15px;
+    font-size: 1em;
+    background-color: #27ae60; /* #27ae60 Green button */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.more-info-btn:hover {
+    background-color: #2ecc71; /* Darker green on hover */
+}
+
+/* Pagination Controls */
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.pagination button {
+    padding: 10px 20px;
+    border: 1px solid #ddd;
+    background-color: #a8d5ba; /* Light green */
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.pagination button:hover {
+    background-color: #80bfa3; /* Slightly darker green on hover */
+}
+
+.pagination button:disabled {
+    background-color: #cfd4d8;
+    cursor: not-allowed;
+}
+
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding-top: 60px;
+}
+
+.modal-content {
+    background-color: #ffffff; /* White modal content */
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.close-btn {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
