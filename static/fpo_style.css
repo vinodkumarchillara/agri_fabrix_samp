@@ -1,7 +1,7 @@
 /* General Styles */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f0f9f0; /* Light green background */
+    background-color: #f9f9f9;
     margin: 0;
     padding: 0;
     display: flex;
@@ -15,7 +15,7 @@ body {
     width: 80%;
     max-width: 1200px;
     padding: 20px;
-    background-color: #ffffff; /* White background for container */
+    background-color: #2c3e50;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
@@ -25,7 +25,7 @@ body {
 h1 {
     text-align: center;
     margin-bottom: 20px;
-    color: #27ae60; /* #27ae60 Green for heading */
+    color: #ecf0f1;
     font-size: 2.5em;
     font-weight: bold;
 }
@@ -36,14 +36,14 @@ h1 {
     flex-wrap: wrap;
     gap: 20px;
     justify-content: center;
-    background-color: #f4f8f4; /* Very light green */
+    background-color: #f4f6f7;
     padding-top: 20px;
 }
 
 /* Individual Card */
 .card {
-    background-color: #a8d5ba; /* Light green card background */
-    border: 1px solid #8fbdbe; /* Slightly darker green border */
+    background-color: #a3d8d9;
+    border: 1px solid #8fbdbe;
     border-radius: 8px;
     padding: 16px;
     width: 220px;
@@ -55,7 +55,7 @@ h1 {
 .card:hover {
     transform: scale(1.05);
     box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
-    background-color: #80bfa3; /* Slightly darker green on hover */
+    background-color: #b39ddb;
 }
 
 /* Card Titles */
@@ -68,7 +68,7 @@ h1 {
 .card_num {
     font-size: 12px;
     color: #9c1212;
-    background-color: #ecf457; /* Yellow for emphasis */
+    background-color: #efc457;
     border: 1px solid #8fbdbe;
 }
 
@@ -80,7 +80,7 @@ h1 {
 .more-info-btn {
     padding: 8px 15px;
     font-size: 1em;
-    background-color: #27ae60; /* #27ae60 Green button */
+    background-color: #007bff;
     color: white;
     border: none;
     border-radius: 4px;
@@ -89,7 +89,7 @@ h1 {
 }
 
 .more-info-btn:hover {
-    background-color: #2ecc71; /* Darker green on hover */
+    background-color: #0056b3;
 }
 
 /* Pagination Controls */
@@ -103,14 +103,14 @@ h1 {
 .pagination button {
     padding: 10px 20px;
     border: 1px solid #ddd;
-    background-color: #a8d5ba; /* Light green */
+    background-color: #dcdde1;
     cursor: pointer;
     border-radius: 5px;
     font-weight: bold;
 }
 
 .pagination button:hover {
-    background-color: #80bfa3; /* Slightly darker green on hover */
+    background-color: #b0b9c1;
 }
 
 .pagination button:disabled {
@@ -132,16 +132,26 @@ h1 {
     padding-top: 60px;
 }
 
+/* Modal content */
 .modal-content {
-    background-color: #ffffff; /* White modal content */
+    background-color: #fefefe;
     margin: 5% auto;
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
     max-width: 600px;
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
+    overflow-y: auto;  /* Ensure scrolling within modal if content overflows */
+    max-height: 80vh;  /* Limit modal content height to 80% of viewport height */
 }
 
+/* Make modal content scrollable */
+.modal-content h2 {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+}
+
+/* Close button */
 .close-btn {
     color: #aaa;
     float: right;
@@ -154,4 +164,13 @@ h1 {
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+/* Ensure modal works well on smaller devices */
+@media screen and (max-width: 768px) {
+    .modal-content {
+        width: 90%;
+        max-width: 100%;
+        padding: 15px;
+    }
 }
