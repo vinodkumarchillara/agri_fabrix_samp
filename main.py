@@ -43,7 +43,7 @@ async def main_index():
         return f.read()
     
 @app.get("/fpo_database", response_class=HTMLResponse)
-async def read_index():
+async def read_fpo_database():
     with open(os.path.join("static", "fpo_database.html")) as f:
         return HTMLResponse(content=f.read())
 
