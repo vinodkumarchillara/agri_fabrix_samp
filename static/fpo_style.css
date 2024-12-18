@@ -133,8 +133,8 @@ h1 {
 /* Modal content */
 .modal-content {
     background-color: #fefefe;
-    margin: 5% auto;
-    padding: 20px;
+    margin: 1% auto;
+    padding: 10px;
     border: 1px solid #888;
     width: 80%;
     max-width: 600px;
@@ -146,7 +146,7 @@ h1 {
 /* Make modal content scrollable */
 .modal-content h2 {
     font-size: 1.5em;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 /* Close button */
@@ -205,6 +205,11 @@ h1 {
     .pagination button {
         font-size: 0.6em;
         padding: 8px 12px;
+    }
+
+    /* Modal styles */
+    .modal {
+        padding-top: 0;  /* Remove the top gap */
     }
 
     /* Modal content */
