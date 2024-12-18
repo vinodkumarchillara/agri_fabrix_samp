@@ -198,7 +198,7 @@ h1 {
     /* Button */
     .more-info-btn {
         font-size: 0.9em;
-        padding: 5px 10px;
+        padding: 7px 12px;
     }
 
     /* Pagination */
@@ -211,10 +211,10 @@ h1 {
     .modal-content {
         width: 90%;
         max-width: 100%;
-        padding: 15px;
+        padding: 5px;
     }
 
     .modal-content h2 {
-        font-size: 1.5em;
+        font-size: 1.0em;
     }
 }
